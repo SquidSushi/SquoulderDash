@@ -1,13 +1,15 @@
 //
 // Created by Oliver on 06.04.2023.
 //
+#pragma once
+#include <vector>
 #include "enums.h"
 
 #ifndef RAYLIBSTARTER_GAME_H
 #define RAYLIBSTARTER_GAME_H
 
 
-class game {
+class gameClass {
 public:
     //all verbose functions to call
     void update();
@@ -16,6 +18,7 @@ public:
 private:
     //everything else
     globalGameState state;
+    std::vector<tileID> map;
 };
 
 

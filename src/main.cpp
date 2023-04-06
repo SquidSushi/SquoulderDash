@@ -1,9 +1,13 @@
-﻿#include <cstdlib>
+﻿#pragma once
+#include <cstdlib>
 #include <algorithm>
 
 #include "raylib.h"
 
 #include "config.h"
+#include "gameClass.h"
+
+gameClass game();
 
 int main() {
     // Raylib initialization
