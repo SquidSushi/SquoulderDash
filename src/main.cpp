@@ -11,6 +11,8 @@ int main() {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
+    SetWindowSize(GetScreenWidth()*2,GetScreenHeight()*2);
+    SetWindowPosition((GetMonitorWidth(GetCurrentMonitor())-GetScreenWidth())/2,(GetMonitorHeight(GetCurrentMonitor())-GetScreenHeight())/2);
 
 #ifdef GAME_START_FULLSCREEN
     ToggleFullscreen();
