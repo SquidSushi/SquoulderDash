@@ -8,3 +8,7 @@ gameClass::gameClass() {
     state = mainMenu;
     map.clear();
 }
+
+void gameClass::update() {
+
+}

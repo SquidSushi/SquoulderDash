@@ -9,6 +9,6 @@
 #endif //RAYLIBSTARTER_MYFUNCTIONS_H
 
 Vector2 GetVmouse(float scale, Rectangle canvas) {
-    Vector2 r = {(GetMouseX() + GetMouseDelta().x - canvas.x) / scale, (GetMouseY() + GetMouseDelta().y - canvas.y) / scale};
+    Vector2 r = {(GetMouseX() - canvas.x) / scale, (GetMouseY() - canvas.y) / scale};
     return r;
 }
