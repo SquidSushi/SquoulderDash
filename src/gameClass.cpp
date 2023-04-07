@@ -3,3 +3,8 @@
 //
 
 #include "gameClass.h"
+
+gameClass::gameClass() {
+    state = mainMenu;
+    map.clear();
+}

@@ -8,11 +8,11 @@
 #endif //RAYLIBSTARTER_ENUMS_H
 
 enum tileID{
-    air,
-    solidWall,
-    softWall,
-    rock,
-    player,
+    air = 0,
+    solidWall = 2,
+    softWall = 1,
+    rock = 3,
+    player = 4
 };
 
 enum globalGameState {

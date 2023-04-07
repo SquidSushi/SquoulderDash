@@ -8,10 +8,8 @@
 #include "gameClass.h"
 #include "myFunctions.h"
 
-gameClass game();
-
-Vector2 GetVmouse(float scale, Rectangle canvas);
-
+gameClass* game;
+int globalFrameCounter; //globalFrameCounter
 Vector2 vMouse;
 
 int main() {
@@ -30,6 +28,7 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
+    game = new gameClass();
     Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
     RenderTexture2D canvas = LoadRenderTexture(Game::ScreenWidth, Game::ScreenHeight);
     float renderScale{}; //those two are relevant to drawing and code-cleanliness
@@ -38,6 +37,7 @@ int main() {
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
+        globalFrameCounter++;
         if (IsKeyDown(KEY_LEFT_ALT) && IsKeyPressed(KEY_ENTER)) { //Fullscreen logic.
             if (IsWindowFullscreen()) {
                 ToggleFullscreen();
@@ -51,6 +51,7 @@ int main() {
         // Updates that are made by frame are coded here
         // ...
         // ...
+        game->update();
 
         BeginDrawing();
         // You can draw on the screen between BeginDrawing() and EndDrawing()

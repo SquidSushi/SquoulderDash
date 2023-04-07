@@ -14,11 +14,13 @@ public:
     //all verbose functions to call
     void update();
     void loadLevel(int levelID);
+    gameClass();
 
 private:
     //everything else
     globalGameState state;
     std::vector<tileID> map;
+
 };
 
 
