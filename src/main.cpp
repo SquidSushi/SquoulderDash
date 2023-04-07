@@ -1,4 +1,4 @@
-﻿#pragma once
+﻿
 #include <cstdlib>
 #include <algorithm>
 
@@ -6,8 +6,13 @@
 
 #include "config.h"
 #include "gameClass.h"
+#include "myFunctions.h"
 
 gameClass game();
+
+Vector2 GetVmouse(float scale, Rectangle canvas);
+
+Vector2 vMouse;
 
 int main() {
     // Raylib initialization
@@ -42,6 +47,7 @@ int main() {
                 ToggleFullscreen();
             }
         }
+        vMouse = GetVmouse(renderScale,renderRec);
         // Updates that are made by frame are coded here
         // ...
         // ...
@@ -54,6 +60,7 @@ int main() {
             ClearBackground(WHITE);
             DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             DrawTexture(myTexture, 10, 100, WHITE);
+            DrawCircle(vMouse.x,vMouse.y,16, GetColor(0xFFFF00EF));
         }
         EndTextureMode();
         //The following lines put the canvas in the middle of the window and have the negative as black
@@ -81,3 +88,5 @@ int main() {
 
     return EXIT_SUCCESS;
 }
+
+
