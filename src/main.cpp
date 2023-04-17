@@ -21,6 +21,7 @@ int main() {
     SetWindowSize(GetScreenWidth() * 2, GetScreenHeight() * 2);
     SetWindowPosition((GetMonitorWidth(GetCurrentMonitor()) - GetScreenWidth()) / 2,
                       (GetMonitorHeight(GetCurrentMonitor()) - GetScreenHeight()) / 2);
+    SetExitKey(KEY_NULL);
 
 #ifdef GAME_START_FULLSCREEN
     ToggleFullscreen();
@@ -35,13 +36,10 @@ int main() {
     RenderTexture2D canvas = LoadRenderTexture(Game::ScreenWidth, Game::ScreenHeight);
     float renderScale{}; //those two are relevant to drawing and code-cleanliness
     Rectangle renderRec{};
-    Music song = LoadMusicStream("assets/audio/song.mp3");
-    SetMusicVolume(song, 1);
     float volume; //I use this later on
-    PlayMusicStream(song);
 
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
+    while (!game->gameShouldClose && !WindowShouldClose()) // Detect wether window should close
     {
         globalFrameCounter++;
         if (IsKeyDown(KEY_LEFT_ALT) && IsKeyPressed(KEY_ENTER)) { //Fullscreen logic.
@@ -54,18 +52,8 @@ int main() {
             }
         }
         vMouse = GetVmouse(renderScale, renderRec);
-        // Updates that are made by frame are coded here
-        // ...
-        // ...
         game->update();
 
-        if (IsKeyDown(KEY_M)) {
-            volume = 0.1;
-        } else {
-            volume = 1;
-        }
-        SetMusicVolume(song, volume);
-        UpdateMusicStream(song);
         if (vMouse.x < 0 || vMouse.x > Game::ScreenWidth || vMouse.y < 0 || vMouse.y > Game::ScreenHeight) {
             ShowCursor();
         } else {
@@ -78,30 +66,36 @@ int main() {
         BeginTextureMode(canvas);
         { //Within this block is where we draw our app to the canvas.
             ClearBackground(BLACK);
-            DrawRectangleGradientV(0, 0, Game::ScreenWidth, Game::ScreenHeight, ColorFromHSV((float)globalFrameCounter, 1, 1),
-                                   ColorFromHSV((float)globalFrameCounter + 180, 1, 1));
-            DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
-            DrawTexture(myTexture, 10, 100, WHITE);
-            DrawCircle((int)vMouse.x, (int)vMouse.y, 16.0, GetColor(0xFFFF0000));
+            DrawRectangleGradientV(0, 0, Game::ScreenWidth, Game::ScreenHeight,
+                                   ColorFromHSV((float) globalFrameCounter, 1, 1),
+                                   ColorFromHSV((float) globalFrameCounter + 180, 1, 1));
+            DrawRectangleGradientEx({0, 0, (float) canvas.texture.width, (float) canvas.texture.height},
+                                    ColorFromHSV((float) globalFrameCounter + 0, 1, 1),
+                                    ColorFromHSV((float) globalFrameCounter + 90, 1, 1),
+                                    ColorFromHSV((float) globalFrameCounter + 180, 1, 1),
+                                    ColorFromHSV((float) globalFrameCounter + 270, 1, 1));
+            DrawText("IF YOU CAN READ THIS THE GAME IS NOT DRAWING",10,10,10,BLACK);
+            DrawText(TextFormat("The game state is: %i",game->getState()),10,22,10,BLACK);
+            game->draw();
             Vector2 tri2 = vMouse;
             tri2.x += 9;
             tri2.y += 18;
             Vector2 tri3 = vMouse;
             tri3.x += 18;
             tri3.y += 9;
-            DrawTriangle(vMouse, tri2, tri3, ColorFromHSV((float)globalFrameCounter * 2, 0.5, 1));
+            DrawTriangle(vMouse, tri2, tri3, ColorFromHSV((float) globalFrameCounter * 2, 0.5, 1));
             DrawTriangleLines(vMouse, tri2, tri3, BLACK);
         }
         EndTextureMode();
         //The following lines put the canvas in the middle of the window and have the negative as black
         ClearBackground(BLACK);
-        renderScale = std::min((float)GetScreenHeight() /
+        renderScale = std::min((float) GetScreenHeight() /
                                (float) canvas.texture.height, //Calculates how big or small the canvas has to be rendered.
-                               (float)GetScreenWidth() / (float) canvas.texture.width);
-        renderRec.width = (float)canvas.texture.width * renderScale;
-        renderRec.height = (float)canvas.texture.height * renderScale;
-        renderRec.x = ((float)GetScreenWidth() - renderRec.width) / 2.0f;
-        renderRec.y = ((float)GetScreenHeight() - renderRec.height) / 2.0f;
+                               (float) GetScreenWidth() / (float) canvas.texture.width);
+        renderRec.width = (float) canvas.texture.width * renderScale;
+        renderRec.height = (float) canvas.texture.height * renderScale;
+        renderRec.x = ((float) GetScreenWidth() - renderRec.width) / 2.0f;
+        renderRec.y = ((float) GetScreenHeight() - renderRec.height) / 2.0f;
         DrawTexturePro(canvas.texture, Rectangle{0, 0, (float) canvas.texture.width, (float) -canvas.texture.height},
                        renderRec,
                        {}, 0, WHITE);
