@@ -44,9 +44,9 @@ int main() {
         globalFrameCounter++;
         if (IsKeyDown(KEY_LEFT_ALT) && IsKeyPressed(KEY_ENTER)) { //Fullscreen logic.
             if (IsWindowFullscreen()) {
-                //SetWindowSize(Game::ScreenWidth, Game::ScreenHeight);
+                SetWindowSize(Game::ScreenWidth, Game::ScreenHeight);
             } else {
-                //SetWindowSize(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()));
+                SetWindowSize(1960,1080);
             }
             ToggleFullscreen();
         }

@@ -5,18 +5,80 @@
 #include <string>
 #include "gameClass.h"
 
+int map1[40 * 30] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+                     3, 3, 3, 3, 3, 3, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 5, 2, 2, 4, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     4, 4, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 2, 2, 2, 2, 4, 4, 4, 2, 2, 2, 2,
+                     4, 4, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 4, 4, 4, 4, 4, 2, 2, 2, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 4, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+                     4, 4, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+                     2, 4, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+                     4, 4, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 4, 4, 4, 6, 4, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4,
+                     4, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2,
+                     4, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2,
+                     4, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4,
+                     4, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 4, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2,
+                     4, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+                     4, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     4, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 4, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+                     4, 4, 4, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                     2, 2, 2, 2, 2, 2, 3,
+                     3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+                     3, 3, 3, 3, 3, 3, 3};
+
 gameClass::gameClass() {
     state = mainMenu;
     map.clear();
     menuMusic = (LoadMusicStream(""));
     gameMusic = (LoadMusicStream(""));
+    texTileset = LoadTexture("assets/graphics/tileSet.png");
 }
 
 void gameClass::update() {
-    if (IsMusicStreamPlaying(menuMusic)){
+    if (IsMusicStreamPlaying(menuMusic)) {
         UpdateMusicStream(menuMusic);
     }
-    if (IsMusicStreamPlaying(gameMusic)){
+    if (IsMusicStreamPlaying(gameMusic)) {
         UpdateMusicStream(gameMusic);
     }
     switch (state) {
@@ -39,7 +101,7 @@ void gameClass::update() {
 void gameClass::updateMainMenu() {
     int maxMenuOptions = 3;
     if (IsKeyPressed(KEY_W)) {
-        menuCursor += maxMenuOptions-1;
+        menuCursor += maxMenuOptions - 1;
     }
     if (IsKeyPressed(KEY_S)) {
         menuCursor++;
@@ -48,7 +110,7 @@ void gameClass::updateMainMenu() {
     if (IsKeyPressed(KEY_ENTER)) {
         switch (menuCursor) {
             case 0: //Start Button
-                this->loadLevel(0);
+                this->loadLevel(1);
                 this->goToGameplay();
                 break;
             case 1: //Settings Button
@@ -71,8 +133,29 @@ void gameClass::goToMainMenu() {
 void gameClass::loadLevel(int levelID) {
     TraceLog(0, "loadLevel was called, but function isn't defined yet!");
     //TODO: Load Level
+    map.clear();
+    switch (levelID) {
+        case 1:
 
-
+            for (auto i = 0; i < 40 * 30; i++) {
+                map.push_back((tileID) (map1[i] - 1));
+            }
+            break;
+        default:
+            TraceLog(LOG_FATAL,
+                     "This LOG is called in gameClass::loadLevel! Paramter is invalid! \nProgramm will crash");
+    }
+    //search for player start position
+    int playerIndex{};
+    for (auto iterator = map.begin(); iterator != map.end(); iterator++) {
+        if (*iterator == tilePlayer) {
+            playerIndex = std::distance(map.begin(), iterator);
+            std::printf("%i", playerIndex);
+        }
+    }
+    playerPos.x = playerIndex % 40;
+    playerPos.y = playerIndex / 40;
+    map[playerIndex] = tileAir;
 }
 
 void gameClass::goToGameplay() {
@@ -91,7 +174,7 @@ void gameClass::goToSettings() {
 }
 
 void gameClass::draw() {
-    switch (state){
+    switch (state) {
         case mainMenu:
             drawMainMenu();
             break;
@@ -105,17 +188,17 @@ void gameClass::draw() {
             drawPause();
             break;
         default:
-            DrawText("gameClass::draw() is very confused as to what you are trying to achieve :(",10,34,10,RED);
+            DrawText("gameClass::draw() is very confused as to what you are trying to achieve :(", 10, 34, 10, RED);
     }
 
 }
 
 void gameClass::drawMainMenu() {
-    DrawRectangle(0,0,Game::ScreenWidth,Game::ScreenHeight,BLACK);
+    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, BLACK);
     //TODO: Draw Game Title
-    float buttonWidth = Game::ScreenWidth/3;
+    float buttonWidth = Game::ScreenWidth / 3;
     float buttonHeight = 30;
-    float buttonsHPos = Game::ScreenWidth / 2 - buttonWidth/2;
+    float buttonsHPos = Game::ScreenWidth / 2 - buttonWidth / 2;
     float buttonsVPos = Game::ScreenHeight / 2;
     float buttonOffset = buttonHeight + 10;
     float onButtonHOffset = 5;
@@ -123,16 +206,30 @@ void gameClass::drawMainMenu() {
     float buttonFontSize = 20;
     Rectangle ButtonRec = {buttonsHPos, buttonsVPos, buttonWidth, buttonHeight};
     std::string buttonTexts[3] = {"Start Game", "Settings", "Quit"};
-    for (int i = 0; i<3;i++){
+    for (int i = 0; i < 3; i++) {
         DrawRectangle(buttonsHPos, buttonsVPos + buttonOffset * i, buttonWidth, buttonHeight, DARKGRAY);
-        DrawText(buttonTexts[i].c_str(), buttonsHPos + onButtonHOffset, buttonsVPos + buttonOffset * i + onButtonVOffset, buttonFontSize, WHITE);
+        DrawText(buttonTexts[i].c_str(), buttonsHPos + onButtonHOffset,
+                 buttonsVPos + buttonOffset * i + onButtonVOffset, buttonFontSize, WHITE);
     }
-    DrawText(TextFormat("%i",this->menuCursor),0,0,40,WHITE);
-    DrawRectangleLinesEx(Rectangle{buttonsHPos, (float) buttonsVPos + buttonOffset * menuCursor, buttonWidth, buttonHeight}, 3, WHITE);
+    DrawText(TextFormat("%i", this->menuCursor), 0, 0, 40, WHITE);
+    DrawRectangleLinesEx(
+            Rectangle{buttonsHPos, (float) buttonsVPos + buttonOffset * menuCursor, buttonWidth, buttonHeight}, 3,
+            WHITE);
 }
 
 void gameClass::drawGamePlay() {
     //TODO Draw Gameplay
+    //draw Background
+    const float tilesetTileWidth = 16;
+    const int tilesetColumns = 4;
+    const int mapColumns = 40;
+    for (auto iterator = map.begin(); iterator != map.end(); iterator++) {
+        int i = std::distance(map.begin(), iterator);
+        DrawTextureRec(texTileset, {((int) map[i] % tilesetColumns) * tilesetTileWidth,
+                                    ((int) map[i] / tilesetColumns * tilesetTileWidth), tilesetTileWidth,
+                                    tilesetTileWidth}, {(float) ((int) i % mapColumns) * tilesetTileWidth,
+                                                        (float) ((int) i / mapColumns) * tilesetTileWidth}, WHITE);
+    }
 }
 
 void gameClass::drawSettings() {

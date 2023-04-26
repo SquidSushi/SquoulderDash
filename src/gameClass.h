@@ -45,6 +45,7 @@ private:
     void goToSettings();
     void updateSettings();
     void drawSettings();
+    Texture texTileset;
 };
 
 
