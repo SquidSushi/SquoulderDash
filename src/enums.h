@@ -11,8 +11,7 @@ enum tileID{
     tileAir = 0,
     tileSolidWall = 2,
     tileSoftWall = 1,
-    tileRock = 3,
-    tilePlayer = 4
+    tileRock = 3
 };
 
 enum globalGameState {

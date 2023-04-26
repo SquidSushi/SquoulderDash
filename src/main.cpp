@@ -18,7 +18,7 @@ int main() {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
-    SetWindowSize(GetScreenWidth() * 2, GetScreenHeight() * 2);
+    //SetWindowSize(GetScreenWidth() * 2, GetScreenHeight() * 2);
     SetWindowPosition((GetMonitorWidth(GetCurrentMonitor()) - GetScreenWidth()) / 2,
                       (GetMonitorHeight(GetCurrentMonitor()) - GetScreenHeight()) / 2);
     SetExitKey(KEY_NULL);
@@ -44,12 +44,11 @@ int main() {
         globalFrameCounter++;
         if (IsKeyDown(KEY_LEFT_ALT) && IsKeyPressed(KEY_ENTER)) { //Fullscreen logic.
             if (IsWindowFullscreen()) {
-                ToggleFullscreen();
-                SetWindowSize(Game::ScreenWidth, Game::ScreenHeight);
+                //SetWindowSize(Game::ScreenWidth, Game::ScreenHeight);
             } else {
-                SetWindowSize(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()));
-                ToggleFullscreen();
+                //SetWindowSize(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()));
             }
+            ToggleFullscreen();
         }
         vMouse = GetVmouse(renderScale, renderRec);
         game->update();
