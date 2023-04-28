@@ -38,8 +38,9 @@ int main() {
     Rectangle renderRec{};
     float volume; //I use this later on
 
+
     // Main game loop
-    while (!game->gameShouldClose && !WindowShouldClose()) // Detect wether window should close
+    while (!game->gameShouldClose && !WindowShouldClose()) // Detect whether window should close
     {
         globalFrameCounter++;
         if (IsKeyDown(KEY_LEFT_ALT) && IsKeyPressed(KEY_ENTER)) { //Fullscreen logic.

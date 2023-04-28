@@ -225,11 +225,14 @@ void gameClass::drawGamePlay() {
     const int mapColumns = 40;
     for (auto iterator = map.begin(); iterator != map.end(); iterator++) {
         int i = std::distance(map.begin(), iterator);
-        DrawTextureRec(texTileset, {((int) map[i] % tilesetColumns) * tilesetTileWidth,
-                                    ((int) map[i] / tilesetColumns * tilesetTileWidth), tilesetTileWidth,
-                                    tilesetTileWidth}, {(float) ((int) i % mapColumns) * tilesetTileWidth,
-                                                        (float) ((int) i / mapColumns) * tilesetTileWidth}, WHITE);
+        DrawTextureRec(texTileset, {((int) map[i] % tilesetColumns) * tilesetTileWidth, ((int) map[i] / tilesetColumns * tilesetTileWidth), tilesetTileWidth,
+                                    tilesetTileWidth}, {(float) ((int) i % mapColumns) * tilesetTileWidth, (float) ((int) i / mapColumns) * tilesetTileWidth},
+                       WHITE);
     }
+    //TODO draw player with animations
+    //TODO create player sprite sheet
+
+    //TODO draw auto margin dirt :3
 }
 
 void gameClass::drawSettings() {
