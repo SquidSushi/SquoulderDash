@@ -1,12 +1,13 @@
 ﻿
 #include <cstdlib>
 #include <algorithm>
-
 #include "raylib.h"
-
+#include "raymath.h"
+#include "myFunctions.h"
+#include "enums.h"
 #include "config.h"
 #include "gameClass.h"
-#include "myFunctions.h"
+
 
 gameClass *game;
 int globalFrameCounter; //globalFrameCounter

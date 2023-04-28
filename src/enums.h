@@ -1,6 +1,7 @@
 //
 // Created by Oliver on 06.04.2023.
 //
+#pragma once
 
 #ifndef RAYLIBSTARTER_ENUMS_H
 #define RAYLIBSTARTER_ENUMS_H

@@ -4,6 +4,7 @@
 
 #include <string>
 #include "gameClass.h"
+#include "config.h"
 
 int map1[40 * 30] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
                      3, 3, 3, 3, 3, 3, 3,
@@ -72,6 +73,7 @@ gameClass::gameClass() {
     menuMusic = (LoadMusicStream(""));
     gameMusic = (LoadMusicStream(""));
     texTileset = LoadTexture("assets/graphics/tileSet.png");
+    texSoftWall = LoadTexture("assets/graphics/softWall.png");
 }
 
 void gameClass::update() {
@@ -229,10 +231,17 @@ void gameClass::drawGamePlay() {
                                     tilesetTileWidth}, {(float) ((int) i % mapColumns) * tilesetTileWidth, (float) ((int) i / mapColumns) * tilesetTileWidth},
                        WHITE);
     }
+<<<<<<< Updated upstream
     //TODO draw player with animations
     //TODO create player sprite sheet
 
     //TODO draw auto margin dirt :3
+=======
+    //TODO draw mudstuff
+
+    //Draw player
+    DrawRectangle(playerPos.x * 16, playerPos.y * 16, 16, 16, RED);
+>>>>>>> Stashed changes
 }
 
 void gameClass::drawSettings() {

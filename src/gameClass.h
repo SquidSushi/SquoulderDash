@@ -3,10 +3,9 @@
 //
 #pragma once
 #include <vector>
-#include "header.h"
-#include "raylib.h"
+#include "enums.h"
 #include "rock.h"
-#include "config.h"
+
 
 #ifndef RAYLIBSTARTER_GAME_H
 #define RAYLIBSTARTER_GAME_H
@@ -46,6 +45,7 @@ private:
     void updateSettings();
     void drawSettings();
     Texture texTileset;
+    Texture texSoftWall;
 };
 
 
