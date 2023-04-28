@@ -227,21 +227,62 @@ void gameClass::drawGamePlay() {
     const int mapColumns = 40;
     for (auto iterator = map.begin(); iterator != map.end(); iterator++) {
         int i = std::distance(map.begin(), iterator);
-        DrawTextureRec(texTileset, {((int) map[i] % tilesetColumns) * tilesetTileWidth, ((int) map[i] / tilesetColumns * tilesetTileWidth), tilesetTileWidth,
-                                    tilesetTileWidth}, {(float) ((int) i % mapColumns) * tilesetTileWidth, (float) ((int) i / mapColumns) * tilesetTileWidth},
+        DrawTextureRec(texTileset, {((int) map[i] % tilesetColumns) * tilesetTileWidth,
+                                    ((int) map[i] / tilesetColumns * tilesetTileWidth), tilesetTileWidth,
+                                    tilesetTileWidth}, {(float) ((int) i % mapColumns) * tilesetTileWidth,
+                                                        (float) ((int) i / mapColumns) * tilesetTileWidth},
                        WHITE);
     }
-<<<<<<< Updated upstream
+    {
+
+        //Draw Mud
+        for (auto i = 0; i < map.size(); i++) {
+            int contextSelector = 0;
+            if (map[i] == tileSoftWall) {
+                //check whether we're looking in at least the second row and if the tile above is a soft wall
+                if (i >= mapColumns) {
+                    if (map[i - mapColumns] == tileSoftWall) {
+                        contextSelector += 1;
+                    }
+                }
+                //look whether we're not looking at the rightmost column, then check if the tile to the right is a soft wall
+                if (i % mapColumns != mapColumns - 1) {
+                    if (map[i + 1] == tileSoftWall) {
+                        contextSelector += 2;
+                    }
+                }
+                //check that we are not in the last column, then check if the tile below is a soft wall
+                if (i < map.size() - mapColumns) {
+                    if (map[i + mapColumns] == tileSoftWall)
+                        contextSelector += 4;
+                }
+                //check that we are not in the leftmost columns, then check if the tile to the left is a soft wall
+                if (i % mapColumns != 0) {
+                    if (map[i - 1] == tileSoftWall) {
+                        contextSelector += 8;
+                    }
+                }
+                //Now actually draw the thing
+                float mapTileSize = 16;
+                float setTileSize = 6;
+                Rectangle sourceRec{};
+                sourceRec.width = setTileSize;
+                sourceRec.height = setTileSize;
+                sourceRec.x = setTileSize * (float)(contextSelector % 4);
+                sourceRec.y = setTileSize * (float)(contextSelector / 4);
+                Rectangle targetRec{};
+                targetRec.width = mapTileSize;
+                targetRec.height = mapTileSize;
+                targetRec.x = mapTileSize * (float)(float)(i % mapColumns);
+                targetRec.y = mapTileSize * (float)(i / mapColumns);
+                DrawTexturePro(texSoftWall,sourceRec,targetRec,{},0,WHITE);
+            }
+        }
+    }
+
     //TODO draw player with animations
     //TODO create player sprite sheet
-
-    //TODO draw auto margin dirt :3
-=======
-    //TODO draw mudstuff
-
-    //Draw player
     DrawRectangle(playerPos.x * 16, playerPos.y * 16, 16, 16, RED);
->>>>>>> Stashed changes
 }
 
 void gameClass::drawSettings() {
