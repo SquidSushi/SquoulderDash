@@ -46,6 +46,8 @@ private:
     void drawSettings();
     Texture texTileset;
     Texture texSoftWall;
+    Texture texSoftWallWang;
+    int mapColumns = 40;
 };
 
 

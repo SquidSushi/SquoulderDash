@@ -74,6 +74,7 @@ gameClass::gameClass() {
     gameMusic = (LoadMusicStream(""));
     texTileset = LoadTexture("assets/graphics/tileSet.png");
     texSoftWall = LoadTexture("assets/graphics/softWall.png");
+    texSoftWallWang = LoadTexture("assets/graphics/softWallWangCorners.png");
 }
 
 void gameClass::update() {
@@ -224,7 +225,6 @@ void gameClass::drawGamePlay() {
     //draw Background
     const float tilesetTileWidth = 16;
     const int tilesetColumns = 4;
-    const int mapColumns = 40;
     for (auto iterator = map.begin(); iterator != map.end(); iterator++) {
         int i = std::distance(map.begin(), iterator);
         DrawTextureRec(texTileset, {((int) map[i] % tilesetColumns) * tilesetTileWidth,
@@ -233,9 +233,10 @@ void gameClass::drawGamePlay() {
                                                         (float) ((int) i / mapColumns) * tilesetTileWidth},
                        WHITE);
     }
-    {
 
-        //Draw Mud
+
+    //Draw Mud
+    if (IsKeyUp(KEY_K)) {
         for (auto i = 0; i < map.size(); i++) {
             int contextSelector = 0;
             if (map[i] == tileSoftWall) {
@@ -268,17 +269,40 @@ void gameClass::drawGamePlay() {
                 Rectangle sourceRec{};
                 sourceRec.width = setTileSize;
                 sourceRec.height = setTileSize;
-                sourceRec.x = setTileSize * (float)(contextSelector % 4);
-                sourceRec.y = setTileSize * (float)(contextSelector / 4);
+                sourceRec.x = setTileSize * (float) (contextSelector % 4);
+                sourceRec.y = setTileSize * (float) (contextSelector / 4);
                 Rectangle targetRec{};
                 targetRec.width = mapTileSize;
                 targetRec.height = mapTileSize;
-                targetRec.x = mapTileSize * (float)(float)(i % mapColumns);
-                targetRec.y = mapTileSize * (float)(i / mapColumns);
-                DrawTexturePro(texSoftWall,sourceRec,targetRec,{},0,WHITE);
+                targetRec.x = mapTileSize * (float) (float) (i % mapColumns);
+                targetRec.y = mapTileSize * (float) (i / mapColumns);
+                DrawTexturePro(texSoftWall, sourceRec, targetRec, {}, 0, WHITE);
             }
         }
+    } else {
+        //DrawMud Wang CORNERS
+        Rectangle sourceRec{};
+        Vector2 destVec{};
+        sourceRec.width = 16;
+        sourceRec.height = 16;
+        for (auto i = 0; i < map.size() - mapColumns; i++) {
+            short contextInfo = 0;
+            if (i % mapColumns != mapColumns - 1) {
+                if (map[i] == tileSoftWall) contextInfo += 8;
+                if (map[i + 1] == tileSoftWall) contextInfo += 4;
+                if (map[i + mapColumns] == tileSoftWall) contextInfo += 2;
+                if (map[i + mapColumns + 1] == tileSoftWall) contextInfo += 1;
+                if (contextInfo > 0) {
+                    destVec.x = (i % mapColumns) * 16 + 8;
+                    destVec.y = (i / mapColumns) * 16 + 8;
+                    sourceRec.x = (contextInfo % 4) * 16;
+                    sourceRec.y = (contextInfo / 4) * 16;
+                    DrawTextureRec(this->texSoftWallWang, sourceRec, destVec, WHITE);
+                }
+            } else continue;
+        }
     }
+
 
     //TODO draw player with animations
     //TODO create player sprite sheet
@@ -294,6 +318,21 @@ void gameClass::drawPause() {
 }
 
 void gameClass::updateGameplay() {
+    if (IsKeyPressed(KEY_D)){
+        playerPos.x += 1;
+    }
+    if (IsKeyPressed(KEY_A)){
+        playerPos.x -= 1;
+    }
+    if (IsKeyPressed(KEY_S)){
+        playerPos.y += 1;
+    }
+    if (IsKeyPressed(KEY_W)){
+        playerPos.y -=1 ;
+    }
+    if (map[playerPos.x+(playerPos.y * mapColumns)] == tileSoftWall){
+        map[playerPos.x+(playerPos.y*mapColumns)] = tileAir;
+    }
     //TODO DO THE GAMEPLAY
 }
 
