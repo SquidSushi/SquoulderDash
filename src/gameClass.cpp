@@ -227,6 +227,7 @@ void gameClass::drawGamePlay() {
     const int tilesetColumns = 4;
     for (auto iterator = map.begin(); iterator != map.end(); iterator++) {
         int i = std::distance(map.begin(), iterator);
+        if (map[i] == tileSoftWall) continue;
         DrawTextureRec(texTileset, {((int) map[i] % tilesetColumns) * tilesetTileWidth,
                                     ((int) map[i] / tilesetColumns * tilesetTileWidth), tilesetTileWidth,
                                     tilesetTileWidth}, {(float) ((int) i % mapColumns) * tilesetTileWidth,
@@ -236,7 +237,7 @@ void gameClass::drawGamePlay() {
 
 
     //Draw Mud
-    if (IsKeyUp(KEY_K)) {
+    if (false) {
         for (auto i = 0; i < map.size(); i++) {
             int contextSelector = 0;
             if (map[i] == tileSoftWall) {

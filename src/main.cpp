@@ -67,14 +67,14 @@ int main() {
         BeginTextureMode(canvas);
         { //Within this block is where we draw our app to the canvas.
             ClearBackground(BLACK);
-            DrawRectangleGradientV(0, 0, Game::ScreenWidth, Game::ScreenHeight,
+            /*DrawRectangleGradientV(0, 0, Game::ScreenWidth, Game::ScreenHeight,
                                    ColorFromHSV((float) globalFrameCounter, 1, 1),
                                    ColorFromHSV((float) globalFrameCounter + 180, 1, 1));
             DrawRectangleGradientEx({0, 0, (float) canvas.texture.width, (float) canvas.texture.height},
                                     ColorFromHSV((float) globalFrameCounter + 0, 1, 1),
                                     ColorFromHSV((float) globalFrameCounter + 90, 1, 1),
                                     ColorFromHSV((float) globalFrameCounter + 180, 1, 1),
-                                    ColorFromHSV((float) globalFrameCounter + 270, 1, 1));
+                                    ColorFromHSV((float) globalFrameCounter + 270, 1, 1));*/
             DrawText("IF YOU CAN READ THIS THE GAME IS NOT DRAWING",10,10,10,BLACK);
             DrawText(TextFormat("The game state is: %i",game->getState()),10,22,10,BLACK);
             game->draw();
