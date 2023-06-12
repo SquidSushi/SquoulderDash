@@ -78,6 +78,7 @@ gameClass::gameClass() {
 }
 
 void gameClass::update() {
+
     if (IsMusicStreamPlaying(menuMusic)) {
         UpdateMusicStream(menuMusic);
     }
@@ -99,6 +100,9 @@ void gameClass::update() {
                 this->goToMainMenu();
             }
     }
+    age++;
+    stateAge++;
+    return;
 }
 
 void gameClass::updateMainMenu() {
@@ -128,6 +132,7 @@ void gameClass::updateMainMenu() {
 
 void gameClass::goToMainMenu() {
     menuCursor = 0;
+    stateAge = 0;
     StopMusicStream(gameMusic);
     PlayMusicStream(menuMusic);
 
@@ -198,6 +203,9 @@ void gameClass::draw() {
 
 void gameClass::drawMainMenu() {
     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, BLACK);
+    drawBubble({200, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 0, 16, 16, BLACK, BLUE, 8, 200);
+    drawBubble({200, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 60, 16, 16, BLACK, BLUE, 8, 400);
+    drawBubble({200, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 120, 16, 16, BLACK, BLUE, 8, 600);
     //TODO: Draw Game Title
     float buttonWidth = Game::ScreenWidth / 3;
     float buttonHeight = 30;
@@ -319,24 +327,34 @@ void gameClass::drawPause() {
 }
 
 void gameClass::updateGameplay() {
-    if (IsKeyPressed(KEY_D)){
+    if (IsKeyPressed(KEY_D)) {
         playerPos.x += 1;
     }
-    if (IsKeyPressed(KEY_A)){
+    if (IsKeyPressed(KEY_A)) {
         playerPos.x -= 1;
     }
-    if (IsKeyPressed(KEY_S)){
+    if (IsKeyPressed(KEY_S)) {
         playerPos.y += 1;
     }
-    if (IsKeyPressed(KEY_W)){
-        playerPos.y -=1 ;
+    if (IsKeyPressed(KEY_W)) {
+        playerPos.y -= 1;
     }
-    if (map[playerPos.x+(playerPos.y * mapColumns)] == tileSoftWall){
-        map[playerPos.x+(playerPos.y*mapColumns)] = tileAir;
+    if (map[playerPos.x + (playerPos.y * mapColumns)] == tileSoftWall) {
+        map[playerPos.x + (playerPos.y * mapColumns)] = tileAir;
     }
     //TODO DO THE GAMEPLAY
 }
 
 void gameClass::updatePause() {
     //TODO Pause updating
+}
+
+void gameClass::drawBubble(Vector2 origin, float minimumWidth, float growthWidth, int duration, float height, int delay, float minRadius, float growthRadius,
+                           Color clr1, Color clr2, float cycles, float drift) {
+    float relativeTime = (float) ((stateAge - delay) % duration) / duration;
+    float x = origin.x + (minimumWidth + growthWidth * relativeTime) * std::sin(relativeTime * PI / (2 / cycles)) + relativeTime * drift;
+    float y = origin.y - relativeTime * height;
+    Color effectiveColor = ColorAlphaBlend(clr1, clr2, ColorAlpha(WHITE,relativeTime));
+    float radius = minRadius + relativeTime * growthRadius;
+    DrawCircle(x,y,radius, effectiveColor);
 }
