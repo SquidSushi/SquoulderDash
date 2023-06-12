@@ -202,10 +202,15 @@ void gameClass::draw() {
 }
 
 void gameClass::drawMainMenu() {
-    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, BLACK);
-    drawBubble({200, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 0, 16, 16, BLACK, BLUE, 8, 200);
+    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, BLUE);
+    for (int i = 0; i < 13; i++){
+        drawBubble({i*Game::ScreenWidth/13.f, Game::ScreenHeight},32,96,60*7*4,Game::ScreenHeight+200, 120*7*sinf(i),0,48, BLUE,WHITE,30,40);
+    }
+    /*drawBubble({200, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 0, 16, 16, BLACK, BLUE, 8, 200);
     drawBubble({200, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 60, 16, 16, BLACK, BLUE, 8, 400);
-    drawBubble({200, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 120, 16, 16, BLACK, BLUE, 8, 600);
+    drawBubble({Game::ScreenWidth, Game::ScreenHeight + 50}, 10, 70, 180, Game::ScreenHeight + 100, 120, 16, 16, BLACK, BLUE, 8, -500);
+    drawBubble({0,Game::ScreenHeight+40},40,60,360,Game::ScreenHeight+40+60+40,0,16,16,BLACK,BLUE,10,Game::ScreenWidth);
+*/
     //TODO: Draw Game Title
     float buttonWidth = Game::ScreenWidth / 3;
     float buttonHeight = 30;
@@ -215,7 +220,7 @@ void gameClass::drawMainMenu() {
     float onButtonHOffset = 5;
     float onButtonVOffset = 5;
     float buttonFontSize = 20;
-    Rectangle ButtonRec = {buttonsHPos, buttonsVPos, buttonWidth, buttonHeight};
+    Rectangle ButtonRec;// = {buttonsHPos, buttonsVPos, buttonWidth, buttonHeight};
     std::string buttonTexts[3] = {"Start Game", "Settings", "Quit"};
     for (int i = 0; i < 3; i++) {
         DrawRectangle(buttonsHPos, buttonsVPos + buttonOffset * i, buttonWidth, buttonHeight, DARKGRAY);
@@ -351,7 +356,7 @@ void gameClass::updatePause() {
 
 void gameClass::drawBubble(Vector2 origin, float minimumWidth, float growthWidth, int duration, float height, int delay, float minRadius, float growthRadius,
                            Color clr1, Color clr2, float cycles, float drift) {
-    float relativeTime = (float) ((stateAge - delay) % duration) / duration;
+    float relativeTime = (float) ((stateAge - delay + duration) % duration) / duration;
     float x = origin.x + (minimumWidth + growthWidth * relativeTime) * std::sin(relativeTime * PI / (2 / cycles)) + relativeTime * drift;
     float y = origin.y - relativeTime * height;
     Color effectiveColor = ColorAlphaBlend(clr1, clr2, ColorAlpha(WHITE,relativeTime));
