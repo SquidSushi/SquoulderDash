@@ -5,6 +5,7 @@
 #include <string>
 #include "gameClass.h"
 #include "config.h"
+#include "cmath"
 
 int map1[40 * 30] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
                      3, 3, 3, 3, 3, 3, 3,
@@ -235,6 +236,7 @@ void gameClass::drawMainMenu() {
 
 void gameClass::drawGamePlay() {
     //TODO Draw Gameplay
+    BeginMode2D(gameCam);
     //draw Background
     const float tilesetTileWidth = 16;
     const int tilesetColumns = 4;
@@ -315,12 +317,14 @@ void gameClass::drawGamePlay() {
                 }
             } else continue;
         }
+
     }
 
 
     //TODO draw player with animations
     //TODO create player sprite sheet
     DrawRectangle(playerPos.x * 16, playerPos.y * 16, 16, 16, RED);
+    EndMode2D();
 }
 
 void gameClass::drawSettings() {
@@ -332,6 +336,24 @@ void gameClass::drawPause() {
 }
 
 void gameClass::updateGameplay() {
+    if (IsKeyPressed(KEY_LEFT)){
+        gameCam.target.x--;
+    }
+    if (IsKeyPressed(KEY_RIGHT)){
+        gameCam.target.x++;
+    }
+    if (IsKeyPressed(KEY_DOWN)){
+        gameCam.target.y++;
+    }
+    if (IsKeyPressed(KEY_UP)){
+        gameCam.target.y--;
+    }
+    if (IsKeyPressed(KEY_RIGHT_BRACKET)){
+        gameCam.zoom += 1.f/32;
+    }
+    if (IsKeyPressed(KEY_LEFT_BRACKET)){
+        gameCam.zoom -= 1.f/32;
+    }
     if (IsKeyPressed(KEY_D)) {
         playerPos.x += 1;
     }

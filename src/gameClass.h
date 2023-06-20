@@ -25,6 +25,7 @@ public:
     }
 private:
     //everything else
+    Camera2D gameCam{{0,0},{0,0},0,1};
     int age;
     int stateAge;
     globalGameState state;
