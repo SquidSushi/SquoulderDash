@@ -349,10 +349,10 @@ void gameClass::updateGameplay() {
         gameCam.target.y--;
     }
     if (IsKeyPressed(KEY_RIGHT_BRACKET)){
-        gameCam.zoom += 1.f/32;
+        gameCam.zoom += 1.f/4;
     }
     if (IsKeyPressed(KEY_LEFT_BRACKET)){
-        gameCam.zoom -= 1.f/32;
+        gameCam.zoom -= 1.f/4;
     }
     if (IsKeyPressed(KEY_D)) {
         playerPos.x += 1;
